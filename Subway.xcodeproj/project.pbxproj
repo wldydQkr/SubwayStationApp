@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C04B9C64281EA5DD002833B5 /* StationResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04B9C63281EA5DD002833B5 /* StationResponseModel.swift */; };
+		C04B9C66281EAD11002833B5 /* StationArrivalDataResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04B9C65281EAD11002833B5 /* StationArrivalDataResponseModel.swift */; };
 		C075EFFB281D7B7E004EA97C /* StationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C075EFFA281D7B7E004EA97C /* StationDetailViewController.swift */; };
 		C075EFFD281D7E90004EA97C /* StationDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C075EFFC281D7E90004EA97C /* StationDetailCollectionViewCell.swift */; };
 		C0A6D17028197E52006D8703 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A6D16F28197E52006D8703 /* AppDelegate.swift */; };
@@ -19,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C04B9C63281EA5DD002833B5 /* StationResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationResponseModel.swift; sourceTree = "<group>"; };
+		C04B9C65281EAD11002833B5 /* StationArrivalDataResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationArrivalDataResponseModel.swift; sourceTree = "<group>"; };
 		C075EFFA281D7B7E004EA97C /* StationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailViewController.swift; sourceTree = "<group>"; };
 		C075EFFC281D7E90004EA97C /* StationDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		C0A6D16C28197E52006D8703 /* Subway.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Subway.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,6 +78,8 @@
 			children = (
 				C0A6D16F28197E52006D8703 /* AppDelegate.swift */,
 				C0A6D17128197E52006D8703 /* SceneDelegate.swift */,
+				C04B9C63281EA5DD002833B5 /* StationResponseModel.swift */,
+				C04B9C65281EAD11002833B5 /* StationArrivalDataResponseModel.swift */,
 				C075EFF9281D7B61004EA97C /* Scenes */,
 				C0A6D17828197E56006D8703 /* Assets.xcassets */,
 				C0A6D17A28197E56006D8703 /* LaunchScreen.storyboard */,
@@ -161,7 +167,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C075EFFB281D7B7E004EA97C /* StationDetailViewController.swift in Sources */,
+				C04B9C64281EA5DD002833B5 /* StationResponseModel.swift in Sources */,
 				C0A6D17428197E52006D8703 /* StationSearchViewController.swift in Sources */,
+				C04B9C66281EAD11002833B5 /* StationArrivalDataResponseModel.swift in Sources */,
 				C0A6D17028197E52006D8703 /* AppDelegate.swift in Sources */,
 				C075EFFD281D7E90004EA97C /* StationDetailCollectionViewCell.swift in Sources */,
 				C0A6D17228197E52006D8703 /* SceneDelegate.swift in Sources */,

@@ -5,6 +5,7 @@
 //  Created by 박지용 on 2022/04/27.
 //
 
+import Alamofire
 import SnapKit
 import UIKit
 
@@ -19,7 +20,7 @@ class StationSearchViewController: UIViewController {
         
         return tableView
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -27,6 +28,8 @@ class StationSearchViewController: UIViewController {
         // 메소드가 분리되면 상세코드는 몰라도 메소드 이름으로 코드 순서를 구분할 수 있다.
         setNavigationItems()
         setTableViewLayout()
+        
+        requestStationName()
     }
     
     private func setNavigationItems() {
@@ -40,10 +43,21 @@ class StationSearchViewController: UIViewController {
         
         navigationItem.searchController = searchController
     }
-
+    
     private func setTableViewLayout() {
         view.addSubview(tableView)
         tableView.snp.makeConstraints { $0.edges.equalToSuperview()} // 전체 UIViewController에 딱맞게 사이즈 됨
+    }
+    
+    private func requestStationName() {
+        let urlString = "http://openapi.seoul.go.kr:8088/sample/json/SearchInfoBySubwayNameService/1/5/서울역"
+        
+        AF.request(urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "").responseDecodable(of: StationResponseModel.self) { response in
+            guard case .success(let data) = response.result else { return }
+            
+            print(data.stations)
+        }
+        .resume()
     }
     
 }
