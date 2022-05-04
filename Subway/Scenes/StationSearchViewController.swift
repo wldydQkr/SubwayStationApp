@@ -28,8 +28,6 @@ class StationSearchViewController: UIViewController {
         // 메소드가 분리되면 상세코드는 몰라도 메소드 이름으로 코드 순서를 구분할 수 있다.
         setNavigationItems()
         setTableViewLayout()
-        
-        requestStationName()
     }
     
     private func setNavigationItems() {
@@ -49,8 +47,8 @@ class StationSearchViewController: UIViewController {
         tableView.snp.makeConstraints { $0.edges.equalToSuperview()} // 전체 UIViewController에 딱맞게 사이즈 됨
     }
     
-    private func requestStationName() {
-        let urlString = "http://openapi.seoul.go.kr:8088/sample/json/SearchInfoBySubwayNameService/1/5/서울역"
+    private func requestStationName(from stationName: String) {
+        let urlString = "http://openapi.seoul.go.kr:8088/sample/json/SearchInfoBySubwayNameService/1/5/\(stationName)"
         
         AF.request(urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "").responseDecodable(of: StationResponseModel.self) { response in
             guard case .success(let data) = response.result else { return }
@@ -72,6 +70,10 @@ extension StationSearchViewController: UISearchBarDelegate { // 특정 행동의
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) { // 유저가 수정을 마쳤을 때 불려짐
         numberOfCell = 0
         tableView.isHidden = true
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        requestStationName(from: searchText)
     }
 }
 
