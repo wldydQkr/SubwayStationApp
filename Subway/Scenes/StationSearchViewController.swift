@@ -9,7 +9,12 @@ import Alamofire
 import SnapKit
 import UIKit
 
-class StationSearchViewController: UIViewController {
+class StationSearchViewController: UIViewController, UIScrollViewDelegate {
+    var scrollView: UIScrollView!
+    var imageView: UIImageView!
+    
+    var pinchGesture = UIPinchGestureRecognizer()
+    
     private var stations:[Station] = []
     
     private lazy var tableView: UITableView = {
@@ -25,10 +30,51 @@ class StationSearchViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        let frameSize = view.bounds.size
+        scrollView = UIScrollView(frame: CGRect(origin: CGPoint.zero, size: frameSize))
+        
+        let image = UIImage(named: "seoul_subway.png")
+        imageView = UIImageView(image: image)
+        scrollView.contentSize = imageView.bounds.size
+        
+        scrollView.addSubview(imageView)
+        view.addSubview(scrollView)
+        
+        // 텝 횟수에 따라서 동작 결정
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(self.tapToZoom))
+        doubleTap.numberOfTapsRequired = 2
+        doubleTap.numberOfTouchesRequired = 1
+        
+        // 더블텝 제스쳐를 scrllView 상위로 올렷다, 컨테이너 밖으로 벗어나면 터치가 안됨 ㅠㅠ
+        scrollView.addGestureRecognizer(doubleTap)
+        
         // 메소드가 분리되면 상세코드는 몰라도 메소드 이름으로 코드 순서를 구분할 수 있다.
         setNavigationItems()
         setTableViewLayout()
-
+        
+    }
+    
+    // 더블탭 기능, delegate 사용해서, addTaget 으로 사용함, 엄밀하게 더블텝을 위한것보다는, 델리게이트를 이용해서, 불려 오는 함수에 조건을 넣어서 기능을 구현했다.
+    @objc func tapToZoom(_ gestureRecognizer: UIGestureRecognizer) {
+        print("줌..")
+        
+        scrollView.minimumZoomScale = 1.0
+        scrollView.maximumZoomScale = 3.0
+        
+        scrollView.delegate = self
+        
+        // 더블탭 간단 하게 구현
+        if scrollView.zoomScale == CGFloat(1) {
+            scrollView.setZoomScale(3, animated: true)
+        }else {
+            scrollView.setZoomScale(1, animated: true)
+        }
+    }
+    
+    // Pinch Gesture 줌 인, 아웃 가능, 사실상 핵심 기능. 이미지뷰를 반환할때, 하이라키 구조와 컨테이너 개념을 알고 있어야 한다. Forzooming 하려는 대상에 따라서 여러가지 방법으로 구현이 가능함.
+    @objc func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        //print("viewFor")
+        return imageView
     }
     
     private func setNavigationItems() {
