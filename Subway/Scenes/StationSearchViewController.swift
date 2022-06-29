@@ -79,7 +79,7 @@ class StationSearchViewController: UIViewController, UIScrollViewDelegate {
     
     private func setNavigationItems() {
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.title = "지하철 도착 정보"
+        navigationItem.title = "지하철 노선도"
         
         let searchController = UISearchController()
         searchController.searchBar.placeholder = "지하철 역을 입력해주세요."
